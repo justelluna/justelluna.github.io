@@ -11,46 +11,66 @@
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
-            background-color: #222;
+            background-color: #131516;
             color: #fff;
         }
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: #111;
-            padding: 10px 20px;
-        }
+	/* Navigation bar styles */
+	nav {
+    	    position: fixed;
+    	    top: 0;
+    	    left: 0;
+    	    width: 100%;
+    	    background-color: #333; /* Darker background color */
+    	    padding: 10px 0;
+    	    display: flex;
+    	    justify-content: center;
+	}
 
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-right: 20px;
-        }
+	nav a {
+    	    color: #fff;
+    	    text-decoration: none;
+    	    margin-right: 10px;
+    	    padding: 8px 10px;
+    	    border-radius: 5px;
+    	    transition: background-color 0.3s;
+	}
 
+	nav a:hover {
+    	    background-color: #444; /* Darker background color on hover */
+	}
+
+	/* Add hover effect on navigation link */
+	nav a:hover {
+    	    background-color: #555;
+	}
         main {
             padding-top: 50px;
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
-            align-items: center;
+            align-items: stretch;
         }
 
         .box {
-            background-color: #333;
+            background-color: #2f2d2d;
             color: #fff;
             padding: 20px;
             margin: 20px;
-            width: 300px;
+            flex: 1 1 300px;
+            min-width: 300px;
+            max-width: 400px;
             text-align: center;
             border-radius: 5px;
+            box-sizing: border-box;
         }
 
         .box img {
-            max-width: 100%;
-            border-radius: 5px;
-            margin-bottom: 10px;
+    	    max-width: 100%;
+    	    height: 200px; /* Set a fixed height for all images */
+    	    object-fit: cover; /* Ensure the image covers the fixed height */
+    	    border-radius: 5px;
+    	    margin-bottom: 10px;
         }
 
         .learn-more {
@@ -59,6 +79,8 @@
             padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
+            display: inline-block;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -86,6 +108,18 @@
             <img src="photos/oxycotinphoto.jpg" alt="Oxycotin">
             <h2>Oxycotin</h2>
             <p>Oxycotin is used to help relieve severe ongoing pain (such as due to cancer). Oxycodone belongs to a class of drugs known as opioid analgesics. It works in the brain to change how your body feels and responds to pain. Oxy can be highly addictive so, you take it only take alittle bit.</p>
+            <a href="https://youneed.rehab/drugfacts/learnmore" class="learn-more">Learn More</a>
+        </div>
+        <div class="box">
+            <img src="photos/leanphoto.jpg" alt="Lean">
+            <h2>Lean</h2>
+            <p>Lean, also known as "purple drank" is a drink that you sip to get high aswell as to make you sleep better and night and generally make you more of a happy person. This is what i like to call a more minimal drug on this list as it won't any harm to you.</p>
+            <a href="https://youneed.rehab/drugfacts/learnmore" class="learn-more">Learn More</a>
+        </div>
+        <div class="box">
+            <img src="photos/weedphoto2.jpg" alt="Lean">
+            <h2>Weed</h2>
+            <p>Weed, also known as marijuana or cannabis, is a psychoactive drug that comes from the Cannabis sativa plant. When consumed, marijuana can produce a range of effects, including euphoria, relaxation, altered perception of time and space, increased appetite, and enhanced sensory experiences.</p>
             <a href="https://youneed.rehab/drugfacts/learnmore" class="learn-more">Learn More</a>
         </div>
     </main>
