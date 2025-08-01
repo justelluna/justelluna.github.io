@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Self-Hosting Guide</title>
+    <style>
+        :root {
+            --primary: #3b49df;
+            --primary-light: #e5e7ff;
+            --secondary: #6366f1;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #f9fafb;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul {
+            list-style-type: none;
+            margin-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        pre {
+            background-color: var(--card-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.05);
+        }
+        
+        code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .requirements {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .requirements li {
+            display: flex;
+            align-items: center;
+        }
+        
+        .requirements li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .code-comment {
+            color: var(--text-light);
+        }
+        
+        .info-box {
+            background-color: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .client-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .client-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: transform 0.2s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .client-card img {
+            max-width: 100%;
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.6rem;
+            }
+            
+            .client-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Matrix Self-Hosting Guide</h1>
+        <p>Create your own free and open chat server with Matrix protocol</p>
+    </header>
+    
+    <main>
+        <section id="introduction">
+            <h2>Introduction</h2>
+            <p>Matrix is a free/libre API and protocol for chat and voice communication. Think DIY Discord, except without all the spyware.</p>
+            <p>You can set up your own Matrix homeserver using either the Matrix-Synapse or Dendrite software. A Matrix server supports:</p>
+            <ul>
+                <li>Messaging</li>
+                <li>Encrypted messaging</li>
+                <li>Voice and video calls (with a turn server)</li>
+                <li>And many other services</li>
+            </ul>
+        </section>
+        
+        <section id="initial-setup">
+            <h2>Initial Server Setup</h2>
+            <p>This section covers base installation and setup of Matrix-Synapse, about enough to get the homeserver running. If you wish to actually register an account to the instance and use it, consult the further server configuration part.</p>
+            
+            <h3>Prerequisites</h3>
+            <ul class="requirements">
+                <li><strong>Debian 10 or newer</strong></li>
+                <li><strong>NGINX installed</strong></li>
+                <li><strong>Ports 80, 443 and 8448 port-forwarded on your router/modem</strong></li>
+                <li><strong>Your own domain with an A DNS entry set to the public IPv4 address of your server</strong></li>
+                <li><strong>Basic UNIX knowledge</strong></li>
+            </ul>
+        </section>
+        
+        <section id="nginx-config">
+            <h2>Webserver Configuration</h2>
+            <p>Before you install any packages, there has to be an appropriate configuration for Matrix-Synapse in your <code>/etc/nginx/sites-available</code> directory.</p>
+            
+            <p>Here's an example configuration:</p>
+            <pre><code>server {
+    server_name YOUR_DOMAIN;
+
+    listen 80;
+    listen [::]:80;
+
+    listen 443 ssl http2 default_server;
+    listen [::]:443 ssl http2 default_server;
+    
+    listen 8448 ssl http2 default_server;
+    listen [::]:8448 ssl http2 default_server; 
+    
+    location ~* ^(\/_matrix|\/_synapse|\/_client) {
+        proxy_pass http://localhost:8008;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        client_max_body_size 50M;
+    }
+
+    location /.well-known/matrix/client {
+        return 200 '{"m.homeserver": {"base_url": "https://YOUR_DOMAIN"}}';
+        default_type application/json;
+        add_header Access-Control-Allow-Origin *;
+    }
+
+    location /.well-known/matrix/server {
+        return 200 '{"m.server": "YOUR_DOMAIN:443"}';
+        default_type application/json;
+        add_header Access-Control-Allow-Origin *;
+    }
+}</code></pre>
+            
+            <p>This configuration file should be placed in <code>/etc/nginx/sites-available</code> and then symbolically linked to <code>/etc/nginx/sites-enabled</code>:</p>
+            <pre><code>sudo ln -s /etc/nginx/sites-available/YOUR_DOMAIN /etc/nginx/sites-enabled</code></pre>
+        </section>
+        
+        <section id="installation">
+            <h2>Installing packages</h2>
+            <p>To actually install Matrix-Synapse on Debian, first add the official Matrix Debian repo to your system:</p>
+            
+            <pre><code>sudo apt install -y lsb-release wget apt-transport-https
+sudo wget -O /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" |
+    sudo tee /etc/apt/sources.list.d/matrix-org.list</code></pre>
+            
+            <p>Then update the repository database and install the matrix-synapse-py3 package:</p>
+            
+            <pre><code>sudo apt update
+sudo apt install matrix-synapse-py3</code></pre>
+            
+            <p>Now simply reload the following services with systemctl:</p>
+            
+            <pre><code>sudo systemctl restart nginx matrix-synapse</code></pre>
+            
+            <p>And you've done it! Matrix-Synapse is now successfully installed.</p>
+        </section>
+        
+        <section id="further-configuration">
+            <h2>Further Server Configuration</h2>
+            <p>Now that the Matrix-Synapse server has been installed and some basic configuration has been done, it's highly recommended to further configure it for things like SSL encryption, a PostgreSQL database, and user registration.</p>
+            
+            <h3>Encryption with Certbot</h3>
+            <p>Begin by installing Certbot to your Debian system, along with the NGINX extension:</p>
+            
+            <pre><code>sudo apt install python3-certbot python3-certbot-nginx</code></pre>
+            
+            <p>Then use the following command to generate an encryption certificate:</p>
+            
+            <pre><code>sudo certbot --nginx -d YOUR_DOMAIN</code></pre>
+            
+            <p>Success! You've generated an encryption certificate and enabled encryption for your Matrix homeserver.</p>
+            
+            <h3>Enabling PostgreSQL</h3>
+            <p>It's highly recommended to use PostgreSQL as the database for your Matrix homeserver instead of the default SQLite database configuration.</p>
+            
+            <pre><code>sudo apt install postgresql
+sudo systemctl start postgresql</code></pre>
+            
+            <p>Create a new PostgreSQL user and database:</p>
+            
+            <pre><code>sudo su - postgres
+createuser --pwprompt synapse_user
+psql
+CREATE DATABASE synapse
+    ENCODING 'UTF8'
+    LC_COLLATE='C'
+    LC_CTYPE='C'
+    template=template0
+    OWNER synapse_user;</code></pre>
+            
+            <p>Then edit the database configuration in <code>/etc/matrix-synapse/homeserver.yaml</code>:</p>
+            
+            <pre><code>database:
+    name: psycopg2
+    args:
+        user: synapse_user
+        password: secretpassword
+        database: synapse
+        host: localhost
+        cp_min: 5
+        cp_max: 10</code></pre>
+            
+            <p>Restart the service with:</p>
+            
+            <pre><code>sudo systemctl restart matrix-synapse</code></pre>
+            
+            <h3>Enabling user registration</h3>
+            <p>Enabling user registration means anyone will be able to register a Matrix account to your instance.</p>
+            
+            <pre><code>enable_registration: true</code></pre>
+            
+            <p>To create an admin user:</p>
+            
+            <pre><code>sudo register_new_matrix_user -u YOUR_USERNAME -p YOUR_PASSWORD -a -c /etc/matrix-synapse/homeserver.yaml https://YOUR_DOMAIN:8448</code></pre>
+        </section>
+        
+        <section id="client-configuration">
+            <h2>Client Well-Known URI & Federation</h2>
+            <p>The client Well-Known URI is an optional but recommended aspect to configure. It allows any user to simply type in their matrix username into any Matrix client and have this automatically resolve their homeserver.</p>
+            
+            <p>This is already setup in the NGINX configuration previously stated in this guide.</p>
+            
+            <h3>Federation</h3>
+            <p>The NGINX example configuration contains all the lines needed for federation to successfully work under it. No further configuration necessary!</p>
+            
+            <p>You can test the federation here.</p>
+            
+            <p>Extra features for federation:</p>
+            
+            <pre><code>allow_public_rooms_over_federation: true
+allow_public_rooms_without_auth: true</code></pre>
+        </section>
+        
+        <section id="url-previews">
+            <h2>URL Previews</h2>
+            <p>Matrix-Synapse supports URL previews. To enable them, change this line to true in <code>/etc/matrix-synapse/homeserver.yaml</code>:</p>
+            
+            <pre><code>url_preview_enabled: true</code></pre>
+            
+            <p>Make sure to uncomment the <code>url_preview_ip_range_blacklist</code> section.</p>
+        </section>
+        
+        <section id="clients">
+            <h2>Client Recommendations</h2>
+            <p>The most popular client is <a href="https://element.io">Element</a> but its user interface might not be what everyone is used to.</p>
+            
+            <div class="client-section">
+                <div class="client-card">
+                    <h3>Element</h3>
+                    <p>Most popular Matrix client with a modern interface</p>
+                </div>
+                
+                <div class="client-card">
+                    <h3>Schildi Chat</h3>
+                    <p>A fork of Element with WhatsApp-like interface</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>Matrix Self-Hosting Guide &copy; 2023</p>
+        <p>All information provided in this guide is for educational purposes only.</p>
+    </footer>
+</body>
+</html>
