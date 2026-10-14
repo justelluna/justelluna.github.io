@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+ <meta http-equiv="refresh" content="7; url='https://youneed.rehab/RFSentinel/docs'" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RF Sentinel: Police Detector for Android, Flock &amp; Body Cams</title>
+<meta name="description" content="Free police detector for Android: spots police body cams, patrol cars, Flock plate cameras and fake cell towers via Bluetooth and WiFi. No root. Download free.">
+<link rel="canonical" href="https://cis-c0.github.io/RFSentinel/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#050507">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="RF Sentinel">
+<meta property="og:title" content="RF Sentinel: Police Detector for Android, Flock &amp; Body Cams">
+<meta property="og:description" content="Free police detector for Android: spots police body cams, patrol cars, Flock plate cameras and fake cell towers via Bluetooth and WiFi. No root. Download free.">
+<meta property="og:url" content="https://cis-c0.github.io/RFSentinel/">
+<meta property="og:image" content="https://cis-c0.github.io/RFSentinel/assets/og.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="RF Sentinel - BLE and WiFi police scanner for Android">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RF Sentinel: Police Detector for Android, Flock &amp; Body Cams">
+<meta name="twitter:description" content="Free police detector for Android: spots police body cams, patrol cars, Flock plate cameras and fake cell towers via Bluetooth and WiFi. No root. Download free.">
+<meta name="twitter:image" content="https://cis-c0.github.io/RFSentinel/assets/og.png">
+<link rel="icon" href="https://youneed.rehab/RFSentinel/docs/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="https://youneed.rehab/RFSentinel/docs/assets/fonts/share-tech-mono.ttf" as="font" type="font/ttf" crossorigin="">
+<link rel="stylesheet" href="css/style_k-yZ_7wtM.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareApplication", "name": "RF Sentinel", "alternateName": ["RFSentinel", "RF Sentinel police scanner"], "applicationCategory": "UtilitiesApplication", "operatingSystem": "Android 8.0+", "description": "Free police detector for Android: spots police body cams, patrol cars, Flock plate cameras and fake cell towers via Bluetooth and WiFi. No root. Download free.", "url": "https://cis-c0.github.io/RFSentinel/", "downloadUrl": "https://github.com/CIS-C0/RFSentinel/releases/latest", "installUrl": "https://github.com/CIS-C0/RFSentinel/releases/latest", "softwareHelp": "https://cis-c0.github.io/RFSentinel/qa.html", "license": "https://www.gnu.org/licenses/gpl-3.0.html", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "codeRepository": "https://github.com/CIS-C0/RFSentinel", "programmingLanguage": "Kotlin", "image": "https://cis-c0.github.io/RFSentinel/assets/og.png", "screenshot": "https://cis-c0.github.io/RFSentinel/screenshots/list-dedsec.jpg", "softwareVersion": "2.20.0", "dateModified": "2026-10-13", "author": {"@type": "Organization", "name": "CIS-C0", "url": "https://github.com/CIS-C0"}, "sameAs": ["https://github.com/CIS-C0/RFSentinel", "https://discord.gg/NDTjn8HMGq"]}, {"@type": "WebSite", "name": "RF Sentinel", "url": "https://cis-c0.github.io/RFSentinel/"}]}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<main id="main" class="wrap">
+<section class="hero">
+  <div>
+    <p class="kicker">marcus@ctOS-2.0:~$ ./rf_sentinel --passive</p>
+    <h1>RF_SENTINEL<span class="sr-only"> - police detector for Android</span></h1>
+    <p class="lead">Incase you end up on this page, you'll be redirected to RFSentinel Mirrored Documentation page. Please respect Cisco the official author by starring him his official github page</p><p class="lead">https://youneed.rehab/RFSentinel/docs/</p><p class="lead">https://github.com/CIS-C0/RFSentinel</p>
+    
+    
+    
+  </div>
+  <div class="shots">
+    <img src="images/list-dedsec_k-yZ_7wtM.webp" width="540" height="1202" alt="RF Sentinel list view in the DedSec theme with flagged body camera, patrol vehicle and Flock camera detections (demo data)">
+    <img src="images/list-fsociety_k-yZ_7wtM.webp" width="540" height="1202" alt="RF Sentinel list view in the fsociety theme (demo data)">
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</main>
+
+<script>
+// A link to a question (qa.html#detect-flock) opens its answer.
+(function () {
+  function openHash() {
+    var el = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    if (el && el.tagName === "DETAILS") { el.open = true; el.scrollIntoView(); }
+  }
+  openHash();
+  window.addEventListener("hashchange", openHash);
+})();
+// Latest release: version label and a direct link to the signed APK. Falls back to the releases page.
+(function () {
+  var els = document.querySelectorAll("[data-apk]");
+  if (!els.length || !window.fetch) return;
+  fetch("https://api.github.com/repos/CIS-C0/RFSentinel/releases/latest")
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (rel) {
+      if (!rel) return;
+      var apk = (rel.assets || []).filter(function (a) { return /-release\.apk$/.test(a.name); })[0];
+      els.forEach(function (el) {
+        if (apk) el.href = apk.browser_download_url;
+        var v = el.querySelector("[data-version]");
+        if (v) v.textContent = rel.tag_name;
+      });
+    }).catch(function () {});
+})();
+</script>
+
+
+
+</body></html>
